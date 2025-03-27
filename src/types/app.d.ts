@@ -614,8 +614,10 @@ declare global {
   interface SortingStates {
     songsPage?: SongSortTypes;
     artistsPage?: ArtistSortTypes;
-    playlistsPage?: PlaylistSortTypes;
+    playlistsPage?: SongSortTypes;
+    playlistsInfoPage?: PlaylistSortTypes;
     albumsPage?: AlbumSortTypes;
+    albumInfoPage?: SongSortTypes;
     genresPage?: GenreSortTypes;
     musicFoldersPage?: FolderSortTypes;
   }

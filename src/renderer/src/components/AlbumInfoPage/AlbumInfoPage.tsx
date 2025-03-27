@@ -67,7 +67,7 @@ const AlbumInfoPage = () => {
     createQueue,
     updateQueueData,
     addNewNotifications,
-    updateCurrentlyActivePageData,
+    updateSortingOrder,
     playSong
   } = useContext(AppUpdateContext);
   const { t } = useTranslation();
@@ -75,7 +75,7 @@ const AlbumInfoPage = () => {
   const [albumContent, dispatch] = useReducer(reducer, {
     albumData: {} as Album,
     songsData: [] as SongData[],
-    sortingOrder: 'trackNoAscending' as SongSortTypes
+    sortingOrder: 'trackNoAscending' as SongSortTypes 
   });
 
   const albumId = useMemo(
@@ -264,10 +264,7 @@ const AlbumInfoPage = () => {
             options: songSortOptions,
             onChange: (e) => {
               const order = e.currentTarget.value as SongSortTypes;
-              updateCurrentlyActivePageData((currentPageData) => ({
-                ...currentPageData,
-                sortingOrder: order
-              }));
+              updateSortingOrder('albumInfoPage', order);
               dispatch({ type: 'UPDATE_SORTING_ORDER', data: order });
             },
             isDisabled: !(albumContent.songsData.length > 0)
