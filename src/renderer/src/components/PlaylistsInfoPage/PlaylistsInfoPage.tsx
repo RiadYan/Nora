@@ -22,7 +22,7 @@ const PlaylistInfoPage = () => {
   const queue = useStore(store, (state) => state.localStorage.queue);
   const playlistSortingState = useStore(
     store,
-    (state) => state.localStorage.sortingStates?.playlistsPage as SongSortTypes || 'addedOrder'
+    (state) => state.localStorage.sortingStates?.playlistsInfoPage as SongSortTypes || 'addedOrder'
   );
   const preferences = useStore(store, (state) => state.localStorage.preferences);
   const {
