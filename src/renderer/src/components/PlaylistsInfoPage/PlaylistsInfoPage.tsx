@@ -262,7 +262,7 @@ const PlaylistInfoPage = () => {
             onChange: (e) => {
               const order = e.currentTarget.value as SongSortTypes;
               
-              updateSortingOrder('playlistsPage', order);
+              updateSortingOrder('playlistsInfoPage', order);
               setSortingOrder(order);
             },
             isDisabled: !(playlistData.songs && playlistData.songs.length > 0)
