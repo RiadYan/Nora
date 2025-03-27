@@ -22,7 +22,7 @@ const PlaylistInfoPage = () => {
   const queue = useStore(store, (state) => state.localStorage.queue);
   const playlistSortingState = useStore(
     store,
-    (state) => state.localStorage.sortingStates?.songsPage || 'addedOrder'
+    (state) => state.localStorage.sortingStates?.playlistsPage as SongSortTypes || 'addedOrder'
   );
   const preferences = useStore(store, (state) => state.localStorage.preferences);
   const {
@@ -31,6 +31,7 @@ const PlaylistInfoPage = () => {
     addNewNotifications,
     createQueue,
     updateCurrentlyActivePageData,
+    updateSortingOrder,
     playSong
   } = useContext(AppUpdateContext);
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ const PlaylistInfoPage = () => {
   const [playlistData, setPlaylistData] = useState({} as Playlist);
   const [playlistSongs, setPlaylistSongs] = useState([] as SongData[]);
   const [sortingOrder, setSortingOrder] = useState<SongSortTypes>(
-    (currentlyActivePage?.data?.sortingOrder as SongSortTypes) || playlistSortingState
+    playlistSortingState
   );
   const [filteringOrder, setFilteringOrder] = useState<SongFilterTypes>('notSelected');
 
@@ -260,10 +261,8 @@ const PlaylistInfoPage = () => {
             ]),
             onChange: (e) => {
               const order = e.currentTarget.value as SongSortTypes;
-              updateCurrentlyActivePageData((currentPageData) => ({
-                ...currentPageData,
-                sortingOrder: order
-              }));
+              
+              updateSortingOrder('playlistsPage', order as PlaylistSortTypes);
               setSortingOrder(order);
             },
             isDisabled: !(playlistData.songs && playlistData.songs.length > 0)

@@ -43,6 +43,7 @@ export type AppReducerStateActions =
   | { type: 'CONTEXT_MENU_DATA_CHANGE'; data: ContextMenuData }
   | { type: 'CONTEXT_MENU_VISIBILITY_CHANGE'; data: boolean }
   | { type: 'CURRENT_ACTIVE_PAGE_DATA_UPDATE'; data: PageData }
+  | { type: 'SORTING_STATE_UPDATE'; data: Partial<SortingStates>}
   | { type: 'UPDATE_NAVIGATION_HISTORY'; data: NavigationHistoryData }
   | { type: 'UPDATE_PLAYER_TYPE'; data: PlayerTypes }
   | {
@@ -178,6 +179,18 @@ export const reducer = (state: AppReducer, action: AppReducerStateActions): AppR
         currentlyActivePage:
           state.navigationHistory.history[state.navigationHistory.pageHistoryIndex]
       };
+    case 'SORTING_STATE_UPDATE': {
+      return {
+        ...state,
+        localStorage: {
+          ...state.localStorage,
+          sortingStates: {
+            ...state.localStorage.sortingStates,
+            ...action.data
+          }
+        }
+      };
+    }
     case 'UPDATE_NAVIGATION_HISTORY': {
       const navigationHistory = { ...action.data };
       return {

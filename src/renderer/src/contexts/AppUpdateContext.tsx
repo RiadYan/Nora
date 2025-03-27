@@ -24,6 +24,10 @@ export interface AppUpdateContextType {
   changeCurrentActivePage: (pageTitle: PageTitles, data?: PageData) => void;
   updatePageHistoryIndex: (type: 'increment' | 'decrement' | 'home', pageIndex?: number) => void;
   updateCurrentlyActivePageData: (callback: (currentPageData: PageData) => PageData) => void;
+  updateSortingOrder: <K extends keyof SortingStates>(
+    page: K,
+    order: NonNullable<SortingStates[K]>
+  ) => void;
   playSong: (songId: string, isStartPlay?: boolean) => void;
   updateCurrentSongPlaybackState: (isPlaying: boolean) => void;
   handleSkipBackwardClick: () => void;

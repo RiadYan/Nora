@@ -1818,6 +1818,21 @@ export default function App() {
     dispatch({ type: 'UP_NEXT_SONG_DATA_CHANGE', data: upNextSongData });
   }, []);
 
+  const updateSortingOrder = useCallback(
+    <K extends keyof SortingStates>(
+      page: K,
+      order: NonNullable<SortingStates[K]>
+    ) => {
+      dispatch({
+        type: 'SORTING_STATE_UPDATE',
+        data: {
+          [page]: order
+        }
+      });
+    },
+    []
+  );
+  
   const appUpdateContextValues: AppUpdateContextType = useMemo(
     () => ({
       updateUserData,
@@ -1829,6 +1844,7 @@ export default function App() {
       playSong,
       changeCurrentActivePage,
       updateCurrentlyActivePageData,
+      updateSortingOrder,
       addNewNotifications,
       updateNotifications,
       createQueue,
@@ -1863,6 +1879,7 @@ export default function App() {
       playSong,
       changeCurrentActivePage,
       updateCurrentlyActivePageData,
+      updateSortingOrder,
       addNewNotifications,
       updateNotifications,
       createQueue,
